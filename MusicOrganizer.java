@@ -15,6 +15,8 @@ public class MusicOrganizer
     private MusicPlayer player;
     // A reader that can read music files and load them as tracks.
     private TrackReader reader;
+    //pregunta si hay canciones
+    private boolean hayMusica;
 
     /**
      * Create a MusicOrganizer
@@ -27,6 +29,7 @@ public class MusicOrganizer
         readLibrary("audio");
         System.out.println("Music library loaded. " + getNumberOfTracks() + " tracks.");
         System.out.println();
+        hayMusica=false;
     }
 
     /**
@@ -51,13 +54,16 @@ public class MusicOrganizer
      * Play a track in the collection.
      * @param index The index of the track to be played.
      */
-    public void playTrack(int index)
-    {
-        if(indexValid(index)) {
+    public void playTrack(int index){
+        if(hayMusica==true){
+            System.out.println("Ya hay una cancion reproduciendose");
+        }
+        else if(indexValid(index)) {
             Track track = tracks.get(index);
             player.startPlaying(track.getFilename());
             System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle());
             track.incrementPlayCount();
+            hayMusica=true;
         }
     }
 
@@ -121,20 +127,25 @@ public class MusicOrganizer
     /**
      * Play the first track in the collection, if there is one.
      */
-    public void playFirst()
-    {
-        if(tracks.size() > 0) {
+    public void playFirst(){
+        if(hayMusica==true){
+            System.out.println("Ya hay una cancion reproduciendose");
+        }
+        else if(tracks.size() > 0) {
             player.startPlaying(tracks.get(0).getFilename());
             tracks.get(0).incrementPlayCount();
+            hayMusica=true;
         }       
     }
 
     /**
      * Stop the player.
      */
-    public void stopPlaying()
-    {
-        player.stop();
+    public void stopPlaying(){
+        if(hayMusica==true){
+            player.stop();
+            hayMusica=false;
+        }
     }
 
     /**
@@ -198,5 +209,19 @@ public class MusicOrganizer
         else{
             tracks.get(index).setFechaLanzamiento(newFechaLanzamiento);
         }
+    }
+
+    /**
+     * creamos un metodo que nos permite saber que cancion esta reproduciendose 
+     */
+    public String isPlaying(){
+        String song="";
+        if(hayMusica==true){
+            song =song + "The music is playing";
+        }
+            else{
+                song =song + "The music is off";
+            }
+        return song;
     }
 }

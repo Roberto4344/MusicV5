@@ -40,7 +40,7 @@ public class Track
     {
         setDetails("unknown", "unknown", filename);
         playCount= 0;
-        fechaLanzamiento= 0000;
+        fechaLanzamiento= 0;
     }
 
     /**

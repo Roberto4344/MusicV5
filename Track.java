@@ -15,6 +15,8 @@ public class Track
     private String filename;
     // cuenta las veces que se ha reproducido una cancion.
     private int playCount;
+    //muestra el año de lanzamiento.
+    private int fechaLanzamiento;
 
     /**
      * Constructor for objects of class Track.
@@ -38,6 +40,7 @@ public class Track
     {
         setDetails("unknown", "unknown", filename);
         playCount= 0;
+        fechaLanzamiento= 0000;
     }
 
     /**
@@ -73,7 +76,7 @@ public class Track
      */
     public String getDetails()
     {
-        return artist + ": " + title + "  (file: " + filename + ")"+ playCount;
+        return artist + ": " + title + "  (file: " + filename + ")"+" veces repoducida"+ playCount+"  Lanzamiento"+fechaLanzamiento;
     }
 
     /**
@@ -104,4 +107,17 @@ public class Track
         playCount= 0;
     }
 
+    /**
+     * un metodo getter
+     */
+    public int getFechaLanzamiento(){
+        return fechaLanzamiento;
+    }
+    
+    /**
+     * metodo setter
+     */
+    public void setFechaLanzamiento(int newFechaLanzamiento){
+        this.fechaLanzamiento = newFechaLanzamiento;
+    }
 }

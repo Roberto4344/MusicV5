@@ -184,4 +184,19 @@ public class MusicOrganizer
             }
         }
     }
+
+    /**
+     * Cambia el año de lanzamiento de una cancion
+     */
+    public void setLanzamiento(int index,int newFechaLanzamiento){
+        if(index < 0) {
+            System.out.println("no valido");
+        }
+        else if(index >= tracks.size()) {
+            System.out.println("no valido el maximo es "+ getNumberOfTracks());
+        }
+        else{
+            tracks.get(index).setFechaLanzamiento(newFechaLanzamiento);
+        }
+    }
 }

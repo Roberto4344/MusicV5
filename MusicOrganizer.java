@@ -55,7 +55,7 @@ public class MusicOrganizer
      * @param index The index of the track to be played.
      */
     public void playTrack(int index){
-        if(hayMusica==true){
+        if(hayMusica == true){
             System.out.println("Ya hay una cancion reproduciendose");
         }
         else if(indexValid(index)) {
@@ -63,7 +63,7 @@ public class MusicOrganizer
             player.startPlaying(track.getFilename());
             System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle());
             track.incrementPlayCount();
-            hayMusica=true;
+            hayMusica = true;
         }
     }
 
@@ -128,13 +128,13 @@ public class MusicOrganizer
      * Play the first track in the collection, if there is one.
      */
     public void playFirst(){
-        if(hayMusica==true){
+        if(hayMusica == true){
             System.out.println("Ya hay una cancion reproduciendose");
         }
         else if(tracks.size() > 0) {
             player.startPlaying(tracks.get(0).getFilename());
             tracks.get(0).incrementPlayCount();
-            hayMusica=true;
+            hayMusica = true;
         }       
     }
 
@@ -142,9 +142,9 @@ public class MusicOrganizer
      * Stop the player.
      */
     public void stopPlaying(){
-        if(hayMusica==true){
+        if(hayMusica == true){
             player.stop();
-            hayMusica=false;
+            hayMusica = false;
         }
     }
 
@@ -214,14 +214,13 @@ public class MusicOrganizer
     /**
      * creamos un metodo que nos permite saber que cancion esta reproduciendose 
      */
-    public String isPlaying(){
-        String song="";
+    public void isPlaying(){
+        
         if(hayMusica==true){
-            song =song + "The music is playing";
+           System.out.println("The music is playing");
         }
             else{
-                song =song + "The music is off";
+                System.out.println( "The music is off");
             }
-        return song;
     }
 }

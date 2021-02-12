@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * A class to hold details of audio tracks.
@@ -215,12 +216,51 @@ public class MusicOrganizer
      * creamos un metodo que nos permite saber que cancion esta reproduciendose 
      */
     public void isPlaying(){
-        
+
         if(hayMusica==true){
-           System.out.println("The music is playing");
+            System.out.println("The music is playing");
         }
-            else{
-                System.out.println( "The music is off");
+        else{
+            System.out.println( "The music is off");
+        }
+    }
+
+    /**
+     * Muestra los detalles con un iterador
+     */
+    public void listAllTrackWithIterator(){       
+        Iterator <Track> it = tracks.iterator();
+        while (it.hasNext()){
+            Track t = it.next();            
+            System.out.println(t.getDetails());            
+        }
+    }
+
+    /**
+     * Elimina una cancion por el artista
+     */
+    public void removeByArtist(String artista){
+        Iterator<Track> it = tracks.iterator();
+        while (it.hasNext()) {
+            Track t = it.next();
+            String artist = t.getArtist();
+            if (artist.contains(artista)) {
+                it.remove();
             }
+        }
+    }
+
+    /**
+     * Elimina una canion por titulo
+     */
+    public void removeByTitle(String titulo){       
+        Iterator <Track> it = tracks.iterator();
+        while (it.hasNext()){
+            Track t = it.next();
+            String title = t.getTitle();
+            if(title.contains(titulo)){
+                it.remove();
+            }
+        }
     }
 }

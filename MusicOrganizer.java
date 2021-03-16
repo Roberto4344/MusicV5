@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Iterator;
-
+import java.util.Random;
 /**
  * A class to hold details of audio tracks.
  * Individual tracks may be played.
@@ -18,16 +18,18 @@ public class MusicOrganizer
     private TrackReader reader;
     //pregunta si hay canciones
     private boolean hayMusica;
+    //genera un random 
+    Random index = new Random();
 
     /**
      * Create a MusicOrganizer
      */
-    public MusicOrganizer()
+    public MusicOrganizer(String carpeta)
     {
         tracks = new ArrayList<Track>();
         player = new MusicPlayer();
         reader = new TrackReader();
-        readLibrary("audio");
+        readLibrary(carpeta);
         System.out.println("Music library loaded. " + getNumberOfTracks() + " tracks.");
         System.out.println();
         hayMusica=false;
@@ -263,4 +265,37 @@ public class MusicOrganizer
             }
         }
     }
+
+    /**
+     * nos reproduce una cancion al azar
+     */
+    public void playRandom(){
+        int num= index.nextInt(tracks.size());
+        if(hayMusica == true){
+            System.out.println("Ya hay una cancion reproduciendose");
+        }
+        else if(indexValid(num)) {
+            Track track = tracks.get(num);
+            player.startPlaying(track.getFilename());
+            System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle());
+            track.incrementPlayCount();
+            hayMusica = true;
+        }
+    }
+
+    /**
+     * introduciomos el metodo play sufle que reproduce todas las canciones un poco
+     */
+    public void playShuffle(){
+        ArrayList<Track> copia = new ArrayList(); 
+        copia = (ArrayList)tracks.clone();
+        while(copia.size()>0){
+            int num = index.nextInt(copia.size());
+            Track track = copia.get(num);
+            System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle());
+            player.playSample(track.getFilename());
+            copia.remove(num);
+        }
+    }
 }
+
